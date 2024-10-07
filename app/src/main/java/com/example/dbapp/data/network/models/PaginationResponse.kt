@@ -2,8 +2,8 @@ package com.example.dbapp.data.network.models
 
 import com.google.gson.annotations.SerializedName
 
-data class PaginationResponse<T>(
-    @SerializedName("items") val items: List<T>,
+data class PaginationResponse(
+    @SerializedName("items") val items: MutableList<CharacterAPI>,
     @SerializedName("meta") val meta: Meta,
     @SerializedName("links") val links: Links
 )
