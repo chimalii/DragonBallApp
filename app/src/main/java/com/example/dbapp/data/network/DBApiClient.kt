@@ -19,4 +19,12 @@ class DBApiClient {
 
         return allCharacters
     }
+
+    suspend fun getCharacterByName(name: String): List<CharacterAPI> {
+        return try {
+            api.getCharacterByName(name)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
 }

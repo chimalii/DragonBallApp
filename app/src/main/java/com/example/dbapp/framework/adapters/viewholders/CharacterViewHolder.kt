@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.dbapp.R
 import com.example.dbapp.data.network.models.CharacterAPI
 import com.example.dbapp.databinding.ItemCharacterBinding
 
@@ -15,13 +16,15 @@ class CharacterViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(character: CharacterAPI) {
+        val context = binding.root.context
+
         binding.tvName.text = character.name
         binding.tvDescription.text = character.description
-        binding.tvKi.text = "Ki: ${character.ki}"
-        binding.tvMaxKi.text = "Max Ki: ${character.maxKi}"
-        binding.tvRace.text = "Race: ${character.race}"
-        binding.tvGender.text = "Gender: ${character.gender}"
-        binding.tvAffiliation.text = "Affiliation: ${character.affiliation}"
+        binding.tvKi.text = context.getString(R.string.ki, character.ki)
+        binding.tvMaxKi.text = context.getString(R.string.max_ki, character.maxKi)
+        binding.tvRace.text = context.getString(R.string.raza, character.race)
+        binding.tvGender.text = context.getString(R.string.genero, character.gender)
+        binding.tvAffiliation.text = context.getString(R.string.afiliacion, character.affiliation)
 
         // Siempre mostrar la imagen
         binding.ivImage.visibility = View.VISIBLE
@@ -30,10 +33,10 @@ class CharacterViewHolder(
         binding.btnToggleDetails.setOnClickListener {
             if (binding.llDetails.visibility == View.GONE) {
                 binding.llDetails.visibility = View.VISIBLE
-                binding.btnToggleDetails.text = "Ocultar detalles"
+                binding.btnToggleDetails.text = context.getString(R.string.ocultar_detalles)
             } else {
                 binding.llDetails.visibility = View.GONE
-                binding.btnToggleDetails.text = "Desplegar detalles"
+                binding.btnToggleDetails.text = context.getString(R.string.mostrar_detalles)
             }
         }
     }

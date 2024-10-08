@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">DBApp</string>
+    <string name="app_name">Dragon Ball App</string>
+    <string name="mostrar_detalles">Desplegar detalles</string>
+    <string name="ocultar_detalles">Ocultar detalles</string>
+    <string name="ki">Ki: %1$s</string>
+    <string name="max_ki">Ki máximo: %1$s</string>
+    <string name="raza">Raza: %1$s</string>
+    <string name="genero">Genero: %1$s</string>
+    <string name="afiliacion">Afiliación: %1$s</string>
+    <string name="buscar">Busca por Nombre</string>
+
 </resources>

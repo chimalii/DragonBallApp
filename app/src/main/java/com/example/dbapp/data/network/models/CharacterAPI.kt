@@ -13,8 +13,8 @@ data class CharacterAPI(
     @SerializedName("image") val image: String,
     @SerializedName("affiliation") val affiliation: String,
     @SerializedName("deletedAt") val deletedAt: String?,
-    @SerializedName("originPlanet") val originPlanet: OriginPlanet,
-    @SerializedName("transformations") val transformations: List<Transformation>
+    @SerializedName("originPlanet") val originPlanet: OriginPlanet? = null,
+    @SerializedName("transformations") val transformations: List<Transformation>? = null
 )
 
 data class OriginPlanet(

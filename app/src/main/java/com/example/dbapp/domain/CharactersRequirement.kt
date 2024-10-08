@@ -10,3 +10,12 @@ class GetCharactersRequirement {
         return repository.getAllCharacters(limit)
     }
 }
+
+class GetCharacterByNameRequirement {
+    private val repository = CharacterRepository()
+
+    suspend operator fun invoke(name: String): List<CharacterAPI> {
+        return repository.getCharacterByName(name)
+    }
+}
+

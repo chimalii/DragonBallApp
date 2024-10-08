@@ -24,4 +24,9 @@ class CharacterAdapter(
     override fun getItemCount(): Int {
         return data.size
     }
+
+    fun updateData(newCharacterList: ArrayList<CharacterAPI>) {
+        data = newCharacterList
+        notifyDataSetChanged()
+    }
 }

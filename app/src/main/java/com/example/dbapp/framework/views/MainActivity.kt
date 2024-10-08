@@ -3,6 +3,7 @@ package com.example.dbapp.framework.views
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dbapp.data.network.models.CharacterAPI
 import com.example.dbapp.databinding.ActivityMainBinding
@@ -13,8 +14,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: CharacterAdapter
-    private lateinit var data: ArrayList<CharacterAPI>
-
     private val viewModel: CharacterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +21,8 @@ class MainActivity : AppCompatActivity() {
 
         initializeBinding()
         initializeObservers()
+        initializeSearch()
+        initializeBackButton()
         viewModel.loadAllCharacters(10)
     }
 
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeObservers() {
         viewModel.characters.observe(this) { characterList ->
-            setUpRecyclerView(characterList as ArrayList<CharacterAPI>)
+            updateRecyclerView(characterList as ArrayList<CharacterAPI>)
         }
     }
 
@@ -46,5 +47,36 @@ class MainActivity : AppCompatActivity() {
         binding.RVCharacters.layoutManager = linearLayoutManager
         adapter = CharacterAdapter(dataForList)
         binding.RVCharacters.adapter = adapter
+    }
+
+    private fun updateRecyclerView(dataForList: ArrayList<CharacterAPI>) {
+        if (::adapter.isInitialized) {
+            adapter.updateData(dataForList)
+        } else {
+            setUpRecyclerView(dataForList)
+        }
+    }
+
+    private fun initializeSearch() {
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    viewModel.searchCharacter(it)
+                }
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Opicional para que busque mientars escribe,
+                // la coloco porque si no no funciona el object
+                return false
+            }
+        })
+    }
+
+    private fun initializeBackButton() {
+        binding.btnBack.setOnClickListener {
+            binding.searchBar.setQuery("", false)
+            viewModel.loadAllCharacters(10)
+        }
     }
 }
