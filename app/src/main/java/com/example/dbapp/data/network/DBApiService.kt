@@ -1,5 +1,6 @@
 package com.example.dbapp.data.network
 
+import com.example.dbapp.data.network.models.CharacterAPI
 import com.example.dbapp.data.network.models.PaginationResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -10,4 +11,10 @@ interface DBApiService {
         @Query("page") page: Int,
         @Query("limit") limit: Int
     ): PaginationResponse
+
+    @GET("characters")
+    suspend fun getCharacterByName(
+        @Query("name") name: String
+    ): List<CharacterAPI>
 }
+

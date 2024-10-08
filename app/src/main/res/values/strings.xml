@@ -7,5 +7,6 @@
     <string name="raza">Raza: %1$s</string>
     <string name="genero">Genero: %1$s</string>
     <string name="afiliacion">Afiliación: %1$s</string>
+    <string name="buscar">Busca por Nombre</string>
 
 </resources>
